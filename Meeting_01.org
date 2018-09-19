@@ -69,3 +69,6 @@ Portacle делать это необязательно):
                  (setf x cursor-x)
                  (setf y cursor-y)))
 #+END_SRC
+
+* Литература
+ - Practical Common Lisp (en): http://www.gigamonkeys.com/book/
