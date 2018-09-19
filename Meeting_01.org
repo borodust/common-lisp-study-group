@@ -1,0 +1,71 @@
+* Установка
+
+Portacle: https://portacle.github.io/
+
+Следовать инструкции на сайте, но если в кратце:
+ - Скачать архив
+ - Распаковать
+ - Найти в распакованной папке исполнямый файл (portacle.exe для винды, Portacle.app для макоси,
+   portacle.desktop для линукса)
+ - Двойной клик должен запустить либо установщик, либо само приложение
+
+Лучше архив распаковывать по пути, не содержащему пробелов.
+
+
+Дальше после непродолжительного ожидания должна появиться строка вроде:
+#+BEGIN_SRC lisp
+CL-USER>
+#+END_SRC
+
+Туда, справа от =CL-USER>=, нужно скопировать нижеследуюещее (повторно при следующих запусках
+Portacle делать это необязательно):
+#+BEGIN_SRC lisp
+(ql-dist:install-dist "http://bodge.borodust.org/dist/org.borodust.bodge.testing.txt" :replace t :prompt nil)
+#+END_SRC
+И нажать =Enter=, переместив курсор в самый конец за скобку. Затем:
+#+BEGIN_SRC lisp
+  (ql:quickload :cl-study)
+#+END_SRC
+
+Команда может слегка подвисуть - это норм на медленных машинах. После пойдет скачивание
+всяческих полезных штуковин. После завершения процесса, когда опять появится =CL-USER>=,
+скопировать, вставить, нажать =Enter= (дальше мы этот процесс будем называть /выполнить команды/):
+#+BEGIN_SRC lisp
+  (cl-study:run) (in-package :cl-study)
+#+END_SRC
+
+Теперь строка должна начинаться с =CL-STUDY>= и должно появиться окно с белым фоном. Все готово
+для начала знакомства с Common Lisp!
+
+* Переменные
+#+BEGIN_SRC lisp
+  (defvar x 400)
+  (defvar y 400)
+
+  (defvar width 100)
+  (defvar height 100)
+#+END_SRC
+
+* Черный квадрат
+#+BEGIN_SRC lisp
+  (defsketch first-rect
+    (draw-rect (vec2 100 100) 100 100 :fill-paint (vec4 0 0 0 1)))
+#+END_SRC
+
+
+* Интерактивный квадрат
+#+BEGIN_SRC lisp
+  (defsketch second-rect
+    (draw-rect (vec2 x y) width height :fill-paint (vec4 (/ x 1000) 0 (/ y 1000) 1)))
+
+(setf x 500)
+(setf y 300)
+#+END_SRC
+
+* Привязка курсора к переменным x и y
+Квадрат будет следовать за курсором, и цвет квадрата будет меняться в зависимости от положения курсора.
+#+BEGIN_SRC lisp
+  (bind-cursor (lambda (curosr-x cursor-y)
+                 (setf x cursor-x)
+                 (setf y cursor-y)))
+#+END_SRC
