@@ -65,7 +65,7 @@ Portacle делать это необязательно):
 * Привязка курсора к переменным x и y
 Квадрат будет следовать за курсором, и цвет квадрата будет меняться в зависимости от положения курсора.
 #+BEGIN_SRC lisp
-  (bind-cursor (lambda (curosr-x cursor-y)
+  (bind-cursor (lambda (cursor-x cursor-y)
                  (setf x cursor-x)
                  (setf y cursor-y)))
 #+END_SRC
