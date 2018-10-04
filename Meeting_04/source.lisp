@@ -2,7 +2,8 @@
 
 (defparameter *color* (vec4 0 0 0 1))
 
-(define-image :slime "c:/Users/user/Downloads/tile_mobs_mob_1.png")
+(gamekit:register-resource-package :keyword "~/devel/repo/common-lisp-study-group/Meeting_04/")
+(define-image :slime "tile_mobs_mob_1.png")
 
 (defun draw-our-rect (x y)
   (draw-rect (vec2 x y)
