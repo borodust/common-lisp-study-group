@@ -41,4 +41,5 @@
 
 
 (defsketch the-game
-  (draw-image (vec2 0 (float (where-is-pony))) :pony))
+  (where-is-pony)
+  (draw-image (vec2 0 *y*) :pony))
