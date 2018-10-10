@@ -1,0 +1,133 @@
+* Функции
+
+** Именованные
+Определяются с помощью =defun=, например
+
+#+BEGIN_SRC lisp
+  (defun plus (a b)
+    (+ a b))
+#+END_SRC
+
+Именованные функции можно вызывать по имени:
+#+BEGIN_SRC lisp
+  (plus 3 4)
+#+END_SRC
+
+
+** Безымянные
+Определяются с помощью =lambda=, например
+
+#+BEGIN_SRC lisp
+  (lambda (a b)
+    (+ a b))
+#+END_SRC
+
+
+** Функциональный объект (сущность)
+Когда мы определяем именованную или безымянную функции, на самом деле создается специальный
+функциональный объект, который мы можем использовать как значение переменной и вызывать косвенно
+с помощью =funcall=. Для того, чтобы получить функциональный объект именованной функции мы можем
+использовать =function=:
+
+#+BEGIN_SRC lisp
+(funcall (function plus) 3 4)
+#+END_SRC
+
+Или сохранить этот объект в переменную и передать ее в =funcall=:
+
+#+BEGIN_SRC lisp
+  (defparameter *plus-function-essense* (function plus))
+  (funcall *plus-function-essense* 3 4)
+#+END_SRC
+
+Результатом функция =lambda= является функциональный объект, который мы тоже можем таким же
+образом вызывать:
+
+#+BEGIN_SRC lisp
+  (defparameter *another-plus-function-essense* (lambda (a b)
+                                                  (+ a b)))
+  (funcall *another-plus-function-essense* 3 4)
+#+END_SRC
+
+
+* Условные функции/операторы
+Иными словами, формы, которые позволяют на писать код, который зависит от каких либо условий.
+
+Форма =if=:
+#+BEGIN_SRC lisp
+  (if <something-here-is-true>
+      <then-second-form-here-is-executed>
+      <otherwise-this-third-form-is-executed>)
+#+END_SRC
+
+Например:
+#+BEGIN_SRC lisp
+  (if (= 1 1)
+      (print "YES")
+      (print "NO"))
+#+END_SRC
+
+В REPL будет напечатано "YES".
+
+В лиспе форма =nil= означает отрицание, ложь, false. Все, что не =nil=, то означает истину,
+true. Часто для обозначения истины используется форма =t=.
+
+#+BEGIN_SRC lisp
+  (if t
+      (print "YES")
+      (print "NO"))
+#+END_SRC
+Будет выведено "YES".
+
+#+BEGIN_SRC lisp
+  (if nil
+      (print "YES")
+      (print "NO"))
+#+END_SRC
+Будет выведено "NO".
+
+*** Полезные функции сравнение
+
+**** =equal=
+Достаточно универсальная функция сравнения, которая принимает много разных типов аргументов: =equal=.
+Вызов:
+
+#+BEGIN_SRC lisp
+  (equal <x> <y>)
+#+END_SRC
+
+<x> и <y> могут быть любыми числами (целые, комплексные, с плавающие точкой и тд), строками,
+nil, t и некоторыми прочими.
+
+**** =>=, =<=, ===, =<== =>== =/==
+Все эти функции в качестве аргументов принимают только числа, но зато несколько. Например:
+
+"Равны ли"
+#+BEGIN_SRC lisp
+  (= 1 1 1 1)
+#+END_SRC
+
+"Меньше, чем"
+#+BEGIN_SRC lisp
+  (< 1 2 3 4)
+#+END_SRC
+
+"Меньше либо равны"
+#+BEGIN_SRC lisp
+  (<= 1 1 2 2)
+#+END_SRC
+
+"Больше, чем"
+#+BEGIN_SRC lisp
+  (> 4 3 2 1)
+#+END_SRC
+
+"Больше либо равны"
+#+BEGIN_SRC lisp
+  (>= 4 4 2 2)
+#+END_SRC
+
+"Не равны ли"
+#+BEGIN_SRC lisp
+  (/= 4 7 1 20)
+#+END_SRC
